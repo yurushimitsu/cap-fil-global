@@ -24,6 +24,7 @@
             <tbody>
                 @foreach($sortedData as $row)
                     <tr class="bg-white border-b border-gray-200">
+                        {{-- <td class="px-2 py-4 text-gray-800 font-medium">{{ $row->trancheNo }}</td> --}}
                         <td class="px-2 py-4 text-gray-800 font-medium">{{ $row->batchNo }}</td>
                         <td class="px-6 py-4 text-gray-800 font-medium">{{ $row->subscriber }}</td>
                         <td class="px-6 py-4 text-gray-800 font-medium">{{ $row->accountNo }}</td>
@@ -31,22 +32,32 @@
                         <td class="px-6 py-4 text-gray-800 font-medium">{{ $row->schedule }}</td>
                         <td class="px-6 py-4 text-gray-800 font-medium">{{ $row->office }}</td>
                         <td class="px-6 py-4 text-gray-800 font-medium">
+                                @php
+                                    $db = '';
+                                @endphp
                             @if($row instanceof \App\Models\Fullypaid)
                                 Fullypaid
+                                @php
+                                    $db = 'fullypaid';
+                                @endphp
                             @elseif($row instanceof \App\Models\Terminated)
                                 Terminated
+                                @php
+                                    $db = 'terminated';
+                                @endphp
                             @endif
                         </td>
                         <td class="px-6 py-4 text-gray-800 font-medium">
                             <!-- Edit Button -->
                             <button 
-                                id="openEditModal-{{ $row->trancheNo }}" 
+                                id="openEditModal" 
                                 type="button" 
                                 class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-4 py-2.5 me-2 mb-2"
-                                {{-- data-db="{{ $row instanceof \App\Models\Fullypaid ? 'fullypaid' : 'terminated' }}" --}}
-                                data-batchno="{{ $row->batchNo }}"
+                                data-db="{{ $db }}"
+                                data-tranche-no="{{ $row->trancheNo }}"
+                                data-batch-no="{{ $row->batchNo }}"
                                 data-subscriber="{{ $row->subscriber }}"
-                                data-accountno="{{ $row->accountNo }}"
+                                data-account-no="{{ $row->accountNo }}"
                                 data-amount="{{ $row->amount }}"
                                 data-schedule="{{ $row->schedule }}"
                                 data-office="{{ $row->office }}"
@@ -56,145 +67,12 @@
                                 </svg>
                             </button>
             
-                            <!-- Modal -->
-                            <div 
-                                id="crud-modal-{{ $row->trancheNo }}" 
-                                tabindex="-1" 
-                                aria-hidden="true" 
-                                class="hidden fixed inset-0 z-50 flex items-center justify-center bg-opacity-50 transition-opacity duration-300"
-                                {{-- data-db="{{ $row instanceof \App\Models\Fullypaid ? 'fullypaid' : 'terminated' }}" --}} >
-                            
-                                <div class="relative p-4 w-full max-w-xl max-h-full transform transition-all duration-200 scale-95 opacity-0">
-                                    <!-- Modal content -->
-                                    <div class="relative bg-white border border-gray-300 rounded-lg shadow-sm">
-                                        <!-- Modal header -->
-                                        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-200">
-                                            <h3 class="text-lg font-semibold text-gray-900">
-                                                Edit Data
-                                            </h3>
-                                            <button 
-                                                id="closeEditModal-{{ $row->trancheNo }}" 
-                                                type="button" 
-                                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-                                            >
-                                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                                </svg>
-                                                <span class="sr-only">Close modal</span>
-                                            </button>
-                                        </div>
-                                        <!-- Modal body -->
-                                        <form class="p-4 md:p-5">
-                                            <div class="grid gap-4 mb-4 grid-cols-2">
-                                                <div class="col-span-1">
-                                                    <label for="batchNo" class="block mb-2 text-sm text-start font-medium text-gray-900">Batch No.</label>
-                                                    <input type="text" name="batchNo" id="batchNo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Type batch number" required>
-                                                </div>
-                                                <div class="col-span-1">
-                                                    <label for="subscriber" class="block mb-2 text-sm text-start font-medium text-gray-900">Subscriber/Payee</label>
-                                                    <input type="text" name="subscriber" id="subscriber" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Type subscriber/payee" required>
-                                                </div>
-                                                <div class="col-span-1">
-                                                    <label for="accountNo" class="block mb-2 text-sm text-start font-medium text-gray-900">Account No.</label>
-                                                    <input type="text" name="accountNo" id="accountNo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Type account number" required>
-                                                </div>
-                                                <div class="col-span-1">
-                                                    <label for="amount" class="block mb-2 text-sm text-start font-medium text-gray-900">Amount</label>
-                                                    <input type="text" name="amount" id="amount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Type amount" required>
-                                                </div>
-                                                <div class="col-span-1">
-                                                    <label for="schedule" class="block mb-2 text-sm text-start font-medium text-gray-900">Schedule</label>
-                                                    <input type="date" name="schedule" id="schedule" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required>
-                                                </div>
-                                                <div class="col-span-1">
-                                                    <label for="office" class="block mb-2 text-sm text-start font-medium text-gray-900">Servicing Office</label>
-                                                    <input type="text" name="office" id="office" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Type servicing office" required>
-                                                </div>
-                                            </div>
-                                            <div class="flex justify-end gap-2">
-                                                <button type="submit" class="text-white inline-flex items-center bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
-                                                    Cancel
-                                                </button>
-                                                <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
-                                                    Save changes
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-            
-                            <!-- JavaScript to handle modal open/close -->
-                            <script>
-                                // Get modal and button elements for this row
-                                const openEditModalButton{{ $row->trancheNo }} = document.getElementById('openEditModal-{{ $row->trancheNo }}');
-                                const closeEditModalButton{{ $row->trancheNo }} = document.getElementById('closeEditModal-{{ $row->trancheNo }}');
-                                const editModal{{ $row->trancheNo }} = document.getElementById('crud-modal-{{ $row->trancheNo }}');
-                                const modalContent{{ $row->trancheNo }} = editModal{{ $row->trancheNo }}.querySelector('.relative');
-            
-                                // Get db attribute
-                                const dbType{{ $row->trancheNo }} = openEditModalButton{{ $row->trancheNo }}.getAttribute('data-db');
-            
-                                // Open modal
-                                openEditModalButton{{ $row->trancheNo }}.addEventListener('click', () => {
-                                    console.log('Opening modal for', dbType{{ $row->trancheNo }}); // log db type for debugging
-                                    // Get row data from the button data-* attributes
-                                const batchNo = openEditModalButton{{ $row->trancheNo }}.getAttribute('data-batchno');
-                                const subscriber = openEditModalButton{{ $row->trancheNo }}.getAttribute('data-subscriber');
-                                const accountNo = openEditModalButton{{ $row->trancheNo }}.getAttribute('data-accountno');
-                                const amount = openEditModalButton{{ $row->trancheNo }}.getAttribute('data-amount');
-                                const schedule = openEditModalButton{{ $row->trancheNo }}.getAttribute('data-schedule');
-                                const office = openEditModalButton{{ $row->trancheNo }}.getAttribute('data-office');
-                                const db = openEditModalButton{{ $row->trancheNo }}.getAttribute('data-db');  // Get the database type (Fullypaid / Terminated)
-
-                                // Populate the modal input fields with the row data
-                                document.getElementById('batchNo').value = batchNo;
-                                document.getElementById('subscriber').value = subscriber;
-                                document.getElementById('accountNo').value = accountNo;
-                                document.getElementById('amount').value = amount;
-                                document.getElementById('schedule').value = schedule;
-                                document.getElementById('office').value = office;
-                                    editModal{{ $row->trancheNo }}.classList.remove('hidden');
-                                    setTimeout(() => {
-                                        editModal{{ $row->trancheNo }}.classList.remove('opacity-0');
-                                        modalContent{{ $row->trancheNo }}.classList.remove('scale-95', 'opacity-0');
-                                    }, 10);
-                                });
-            
-                                // Close modal
-                                closeEditModalButton{{ $row->trancheNo }}.addEventListener('click', () => {
-                                    editModal{{ $row->trancheNo }}.classList.add('opacity-0');
-                                    modalContent{{ $row->trancheNo }}.classList.add('scale-95', 'opacity-0');
-                                    setTimeout(() => {
-                                        editModal{{ $row->trancheNo }}.classList.add('hidden');
-                                    }, 300);
-                                });
-            
-                                // Close modal when clicking outside
-                                window.addEventListener('click', (event) => {
-                                    if (event.target === editModal{{ $row->trancheNo }}) {
-                                        editModal{{ $row->trancheNo }}.classList.add('opacity-0');
-                                        modalContent{{ $row->trancheNo }}.classList.add('scale-95', 'opacity-0');
-                                        setTimeout(() => {
-                                            editModal{{ $row->trancheNo }}.classList.add('hidden');
-                                        }, 300);
-                                    }
-                                });
-            
-                                // Close modal on Escape key press
-                                document.addEventListener('keydown', (event) => {
-                                    if (event.key === 'Escape' && !editModal{{ $row->trancheNo }}.classList.contains('hidden')) {
-                                        editModal{{ $row->trancheNo }}.classList.add('opacity-0');
-                                        modalContent{{ $row->trancheNo }}.classList.add('scale-95', 'opacity-0');
-                                        setTimeout(() => {
-                                            editModal{{ $row->trancheNo }}.classList.add('hidden');
-                                        }, 300);
-                                    }
-                                });
-                            </script>
-                        
                             <!-- Delete Button -->
-                            <button type="button" class="text-gray-900 bg-red-700 hover:bg-red-800 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-4 py-2.5 me-2 mb-2">
+                            <button type="button" class="text-gray-900 bg-red-700 hover:bg-red-800 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-4 py-2.5 me-2 mb-2"
+                            id="deleteRecordBtn" 
+                            data-tranche-no="{{ $row->trancheNo }}" 
+                            data-db="{{ $db }}"
+                            >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 text-white">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
                                 </svg>
@@ -203,9 +81,244 @@
                     </tr>
                 @endforeach
             </tbody>
-            
         </table>
     </div>
 </div>
+
+<!-- Modal -->
+<div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-opacity-50 transition-opacity duration-300">
+    <div class="relative w-full max-w-3xl p-4 md:p-8 bg-white rounded-lg shadow-lg transform transition-all duration-300">
+        <!-- Modal content -->
+        <div class="relative">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-900">Edit Data</h3>
+                <button id="closeEditModal" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-full text-lg p-2">
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <form id="adminUpdate" method="POST" action="{{ route('updateAdminData') }}" class="p-4 space-y-6">
+                @csrf
+                <div class="grid gap-4 grid-cols-2">
+                    <input type="hidden" id="dbTable" name="dbTable" value="">
+                    <input type="hidden" id="trancheNo" name="trancheNo" value="">
+                    <div>
+                        <label for="batchNo" class="block mb-2 text-sm font-medium text-gray-900">Batch No.</label>
+                        <input type="text" name="batchNo" id="batchNo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5 focus:ring-primary-600 focus:border-primary-600" required>
+                    </div>
+                    <div>
+                        <label for="subscriber" class="block mb-2 text-sm font-medium text-gray-900">Subscriber/Payee</label>
+                        <input type="text" name="subscriber" id="subscriber" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5 focus:ring-primary-600 focus:border-primary-600" required>
+                    </div>
+                    <div>
+                        <label for="accountNo" class="block mb-2 text-sm font-medium text-gray-900">Account No.</label>
+                        <input type="text" name="accountNo" id="accountNo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5 focus:ring-primary-600 focus:border-primary-600" required>
+                    </div>
+                    <div>
+                        <label for="amount" class="block mb-2 text-sm font-medium text-gray-900">Amount</label>
+                        <input type="text" name="amount" id="amount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5 focus:ring-primary-600 focus:border-primary-600" required>
+                    </div>
+                    <div>
+                        <label for="schedule" class="block mb-2 text-sm font-medium text-gray-900">Schedule</label>
+                        <input type="date" name="schedule" id="schedule" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5 focus:ring-primary-600 focus:border-primary-600" required>
+                    </div>
+                    <div>
+                        <label for="office" class="block mb-2 text-sm font-medium text-gray-900">Servicing Office</label>
+                        <input type="text" name="office" id="office" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5 focus:ring-primary-600 focus:border-primary-600" required>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="flex justify-end gap-2">
+                    <button type="button" id="cancelEdit" class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">Cancel</button>
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript to handle the modal opening and populating data
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get all the Edit buttons
+        const editButtons = document.querySelectorAll('#openEditModal');
+        const deleteButtons = document.querySelectorAll('#deleteRecordBtn');
+
+        // Add event listeners to each Edit button
+        editButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                // Get data attributes from the clicked button
+                const dbTable = button.getAttribute('data-db');
+                const trancheNo = button.getAttribute('data-tranche-no');
+                const batchNo = button.getAttribute('data-batch-no');
+                const subscriber = button.getAttribute('data-subscriber');
+                const accountNo = button.getAttribute('data-account-no');
+                const amount = button.getAttribute('data-amount');
+                const schedule = button.getAttribute('data-schedule');
+                const office = button.getAttribute('data-office');
+
+                // Populate the modal's input fields with the data
+                document.getElementById('dbTable').value = dbTable;
+                document.getElementById('trancheNo').value = trancheNo;
+                document.getElementById('batchNo').value = batchNo;
+                document.getElementById('subscriber').value = subscriber;
+                document.getElementById('accountNo').value = accountNo;
+                document.getElementById('amount').value = amount;
+                document.getElementById('schedule').value = schedule;
+                document.getElementById('office').value = office;
+
+                // Show the modal
+                document.getElementById('crud-modal').classList.remove('hidden');
+            });
+        });
+
+        // Close the modal when clicking the close button
+        document.getElementById('closeEditModal').addEventListener('click', function () {
+            document.getElementById('crud-modal').classList.add('hidden');
+        });
+
+        // Close the modal when clicking the close button
+        document.getElementById('cancelEdit').addEventListener('click', function () {
+            document.getElementById('crud-modal').classList.add('hidden');
+        });
+
+        // Handle the form submission
+        document.querySelector('form').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent the form from submitting normally
+
+            const dbTable = document.getElementById('dbTable').value;
+            const trancheNo = document.getElementById('trancheNo').value;
+            const batchNo = document.getElementById('batchNo').value;
+            const subscriber = document.getElementById('subscriber').value;
+            const accountNo = document.getElementById('accountNo').value;
+            const amount = document.getElementById('amount').value;
+            const schedule = document.getElementById('schedule').value;
+            const office = document.getElementById('office').value;
+
+            // Send the data to the backend using Fetch API (or you can use axios)
+            fetch('/admin/update', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}' // CSRF token for Laravel
+                },
+                body: JSON.stringify({
+                    dbTable,
+                    trancheNo,
+                    batchNo,
+                    subscriber,
+                    accountNo,
+                    amount,
+                    schedule,
+                    office
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Display SweetAlert for success
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Record updated successfully',
+                        showConfirmButton: false,
+                        timer: 1500 // Auto-close after 1.5 seconds
+                    }).then(() => {
+                        location.reload(); // Optionally reload the page to reflect changes
+                    });
+                } else {
+                    // Display SweetAlert for error
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Error updating record. Please try again.',
+                        showConfirmButton: true
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Display SweetAlert for a catch error
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Error: ' + error.message,
+                    showConfirmButton: true
+                });
+            });
+
+            // Close the modal
+            document.getElementById('crud-modal').classList.add('hidden');
+        });
+
+
+        // Add event listeners to each Delete button
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                // Get data attributes from the clicked button
+                const dbTable = button.getAttribute('data-db');
+                const trancheNo = button.getAttribute('data-tranche-no');
+
+                // Confirm before deleting
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "This action cannot be undone.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete it!',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Send the DELETE request
+                        fetch(`/admin/delete/${dbTable}/${trancheNo}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}', // CSRF token for Laravel
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                // Show success message
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Deleted!',
+                                    text: 'The record has been deleted.',
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                }).then(() => {
+                                    location.reload(); // Optionally reload the page to reflect changes
+                                });
+                            } else {
+                                // Show error message
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'There was an error deleting the record.',
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Error: ' + error.message,
+                            });
+                        });
+                    }
+                });
+            });
+        });
+    });
+
+    
+</script>
 
 @endsection

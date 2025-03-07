@@ -37,6 +37,10 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/create', [AdminController::class, 'createAdminData'])->name('createAdminData');
 
     Route::get('/table', [AdminController::class, 'getAllData']);
+    Route::post('/update', [AdminController::class, 'updateAdminData'])->name('updateAdminData');
+
+    Route::delete('/delete/{dbTable}/{trancheNo}', [AdminController::class, 'deleteAdminData']);
+
 });
 
 Route::get('/ajaxSearchFullypaid', [FullypaidController::class, 'ajaxSearch'])->name('ajaxSearchFullypaid');
