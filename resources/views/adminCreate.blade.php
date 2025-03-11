@@ -94,7 +94,8 @@
                     text: data.message,
                     confirmButtonColor: '#B1D4E0',
                 }).then(() => {
-                    form.reset();
+                    // form.reset();
+                    window.location.href = '/admin/table';
                 });
             } else {
                 Swal.fire({

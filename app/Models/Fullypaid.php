@@ -10,6 +10,7 @@ class Fullypaid extends Model
     use HasFactory;
 
     protected $table = 'fullypaid';
+    protected $primaryKey = 'trancheNo';
     public $timestamps = false;
     protected $guarded = [];
 }

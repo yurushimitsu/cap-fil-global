@@ -10,6 +10,7 @@ class Terminated extends Model
     use HasFactory;
 
     protected $table = 'terminated';
+    protected $primaryKey = 'trancheNo';
     public $timestamps = false;
     protected $guarded = [];
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Fullypaid;
 use App\Models\Terminated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -36,10 +37,42 @@ class AdminController extends Controller
         $fullypaidData = Fullypaid::all();
         $terminatedData = Terminated::all();
 
-        $allData = $fullypaidData;
+        $allData = $fullypaidData->concat($terminatedData);
         // dd($allData);
         $sortedData = $allData->sortBy('batchNo');
 
         return view('adminTable', compact('sortedData'));
+    }
+
+    public function updateAdminData(Request $request) {
+        $updated = DB::table($request->dbTable)
+            ->where('trancheNo', $request->trancheNo)
+            ->update([
+                'batchNo' => $request->batchNo,
+                'subscriber' => $request->subscriber,
+                'accountNo' => $request->accountNo,
+                'amount' => $request->amount,
+                'schedule' => $request->schedule,
+                'office' => $request->office,
+            ]);
+
+        if ($updated) {
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false, 'message' => 'No records updated']);
+        }
+    }
+
+    public function deleteAdminData($dbTable, $trancheNo) {
+        // Delete the record based on the dbTable and trancheNo
+        $deleted = DB::table($dbTable)
+                    ->where('trancheNo', $trancheNo)
+                    ->delete();
+    
+        if ($deleted) {
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Error deleting record']);
+        }
     }
 }
