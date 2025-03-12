@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Announcement;
 use App\Models\Fullypaid;
 use App\Models\Terminated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -75,4 +78,55 @@ class AdminController extends Controller
             return response()->json(['success' => false, 'message' => 'Error deleting record']);
         }
     }
+
+    public function uploadAnnouncement(Request $request) {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('announcements'), $imageName);
+
+            Announcement::create([
+                'filename' => $imageName,
+            ]);
+        
+            return response()->json(['success' => true]);
+            // return back()->with('success', 'Image uploaded successfully')->with('image', $imageName);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Error deleting record']);
+        
+    }
+
+    public function showAnnouncement() {
+        $latest = Announcement::orderBy('filename', 'desc')->first();
+
+        return view('announcement', compact('latest'));
+    }
+
+    public function getAllAnnouncement() {
+        $announcements = Announcement::all();
+
+        return view('adminAnnouncement', compact('announcements'));
+    }
+    
+    public function deleteAnnouncement($filename) {
+        $deleted = DB::table('announcement')
+                    ->where('filename', $filename)
+                    ->delete();
+    
+        if ($deleted) {
+            if (file_exists(public_path('announcements/' . $filename))) {
+                unlink(public_path('announcements/' . $filename));
+            }
+
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Error deleting record']);
+        }
+    }
+    
 }

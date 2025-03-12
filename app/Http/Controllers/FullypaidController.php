@@ -14,7 +14,7 @@ class FullypaidController extends Controller
             $query = $request->get('query');
             if($query != '') {
                 $data = DB::table('fullypaid')
-                    ->where('accountNo', 'like', '%'.$query.'%')
+                    ->where('accountNo', $query)
                     ->orWhere('subscriber', 'like', '%'.$query.'%')
                     ->orWhere('office', 'like', '%'.$query.'%')
                     ->get();
@@ -72,7 +72,7 @@ class FullypaidController extends Controller
 
         $posts = collect();
         if ($search) {
-            $posts = Fullypaid::where('accountNo', 'like', '%'.$search.'%')
+            $posts = Fullypaid::where('accountNo', $search)
                                 ->get();
         }
         

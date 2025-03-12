@@ -72,7 +72,7 @@ class TerminatedController extends Controller
 
         $posts = collect();
         if ($search) {
-            $posts = Terminated::where('accountNo', 'like', '%'.$search.'%')
+            $posts = Terminated::where('accountNo', $search)
                                 ->get();
         }
         

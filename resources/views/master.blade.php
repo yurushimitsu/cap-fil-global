@@ -9,9 +9,13 @@
 
     {{-- sweetalert --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {{-- flowbite --}}
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
     
     @vite('resources/css/app.css')
-    <link rel="icon" type="image/x-icon" href="{{ asset('img/hat-graduation-png-5.png')}}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/cap.png') }}">
     <title>CAP College Assurance Plan Philippines</title>
 </head>
 <body>

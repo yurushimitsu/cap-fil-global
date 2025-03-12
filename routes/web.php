@@ -22,7 +22,17 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function () {
-    return view('content');
+    return view('homepage');
+});
+
+// Route::get('/announcement', function () {
+//     return view('announcement');
+// });
+
+Route::get('/announcement', [AdminController::class, 'showAnnouncement']);
+
+Route::get('/contact_us', function () {
+    return view('contact_us');
 });
 
 Route::get('/fullypaid', function () {
@@ -34,16 +44,19 @@ Route::get('/terminated', function () {
 
 Route::group(['prefix' => 'admin'], function(){
     Route::get('/create', function () { return view('adminCreate'); });
-    Route::post('/create', [AdminController::class, 'createAdminData'])->name('createAdminData');
-
+    // Route::get('/announcement', function () { return view('adminAnnouncement'); });
     Route::get('/table', [AdminController::class, 'getAllData']);
+    Route::post('/create', [AdminController::class, 'createAdminData'])->name('createAdminData');
     Route::post('/update', [AdminController::class, 'updateAdminData'])->name('updateAdminData');
-
     Route::delete('/delete/{dbTable}/{trancheNo}', [AdminController::class, 'deleteAdminData']);
 
+    Route::get('/announcement', [AdminController::class, 'getAllAnnouncement']);
+    Route::post('/announcement', [AdminController::class, 'uploadAnnouncement'])->name('uploadAnnouncement');
+    Route::delete('/announcement/delete/{filename}', [AdminController::class, 'deleteAnnouncement']);
+    
 });
 
-Route::get('/ajaxSearchFullypaid', [FullypaidController::class, 'ajaxSearch'])->name('ajaxSearchFullypaid');
+// Route::get('/ajaxSearchFullypaid', [FullypaidController::class, 'ajaxSearch'])->name('ajaxSearchFullypaid');
 
 Route::group(['prefix' => 'search'], function(){
     Route::get('/fullypaid', [FullypaidController::class, 'searchFullypaid'])->name('searchFullypaid');
