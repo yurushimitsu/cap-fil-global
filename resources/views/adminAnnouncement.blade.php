@@ -32,22 +32,22 @@
                 <tr>
                     {{-- <th scope="col" class="px-2 py-3">Tranche No.</th> --}}
                     <th scope="col" class="px-2 py-3">Filename</th>
+                    <th scope="col" class="px-2 py-3">Posted At</th>
                     <th scope="col" class="px-2 py-3">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @if($announcements->isEmpty())
                     <tr class="bg-white border-b border-gray-200">
-                        <td colspan="2" class="px-2 py-4 text-center text-gray-700 font-medium">
+                        <td colspan="3" class="px-2 py-4 text-center text-gray-700 font-medium">
                             No announcements available.
                         </td>
                     </tr>
                 @else
                     @foreach($announcements as $row)
                         <tr class="bg-white border-b border-gray-200">
-                            {{-- <td class="px-2 py-4 text-gray-800 font-medium">{{ $row->trancheNo }}</td> --}}
                             <td class="px-2 py-4 text-blue-600 hover:text-blue-800 font-medium underline"><a href="{{ asset('announcements/'.$row->filename) }}" target="_blank">{{ $row->filename }}</a></td>
-                            
+                            <td class="px-2 py-4 text-gray-800 font-medium">{{ $row->created_at }}</td>
                             <td class="px-6 py-4 text-gray-800 font-medium">           
                                 <!-- Delete Button -->
                                 <button type="button" class="text-gray-900 bg-red-700 hover:bg-red-800 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-4 py-2.5 me-2 mb-2"
@@ -90,7 +90,7 @@
                     text: data.message,
                     confirmButtonColor: '#B1D4E0',
                 }).then(() => {
-                    form.reset();
+                    location.reload();                    
                 });
             } else {
                 Swal.fire({
@@ -105,7 +105,7 @@
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Something went wrong!',
+                text: 'Please upload an image file',
             });
         });
     });

@@ -7,7 +7,6 @@ use App\Models\Fullypaid;
 use App\Models\Terminated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -42,7 +41,7 @@ class AdminController extends Controller
 
         $allData = $fullypaidData->concat($terminatedData);
         // dd($allData);
-        $sortedData = $allData->sortBy('batchNo');
+        $sortedData = $allData->sortBy(['batchNo', 'subscriber']);
 
         return view('adminTable', compact('sortedData'));
     }
@@ -96,9 +95,7 @@ class AdminController extends Controller
             return response()->json(['success' => true]);
             // return back()->with('success', 'Image uploaded successfully')->with('image', $imageName);
         }
-
-        return response()->json(['success' => false, 'message' => 'Error deleting record']);
-        
+        return response()->json(['success' => false, 'message' => 'Sorry, we only accepts images']);
     }
 
     public function showAnnouncement() {

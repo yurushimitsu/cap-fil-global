@@ -124,7 +124,7 @@
                     </div>
                     <div>
                         <label for="schedule" class="block mb-2 text-sm font-medium text-gray-900">Schedule</label>
-                        <input type="date" name="schedule" id="schedule" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5 focus:ring-primary-600 focus:border-primary-600" required>
+                        <input type="date" name="schedule" id="schedule" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5 focus:ring-primary-600 focus:border-primary-600" onfocus="disablePastDates()" required>
                     </div>
                     <div>
                         <label for="office" class="block mb-2 text-sm font-medium text-gray-900">Servicing Office</label>
@@ -318,7 +318,15 @@
         });
     });
 
-    
+    function disablePastDates() {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("schedule").setAttribute("min", today);
+    }    
 </script>
 
 @endsection
