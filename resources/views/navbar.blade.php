@@ -17,7 +17,7 @@
           <a href="{{ url('/home') }}" class="flex items-center rounded-md px-3 py-2 text-sm font-medium text-black hover:bg-gray-700 hover:text-white" aria-current="page">Home</a>
         </li>
         <li>
-            <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" class="flex items-center text-sm font-medium w-full py-2 px-3 text-gray-900 rounded-md hover:bg-gray-700 hover:text-white">
+            <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" data-dropdown-trigger="hover" class="flex items-center text-sm font-medium w-full py-2 px-3 text-gray-900 rounded-md hover:bg-gray-700 hover:text-white">
               Payment Schedule 
               <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
@@ -36,7 +36,7 @@
             </div>
         </li>
         <li>
-          <button id="dropdownNavbarLink2" data-dropdown-toggle="dropdownNavbar2" class="flex items-center text-sm font-medium w-full py-2 px-3 text-gray-900 rounded-md hover:bg-gray-700 hover:text-white">
+          <button id="dropdownNavbarLink2" data-dropdown-toggle="dropdownNavbar2" data-dropdown-trigger="hover" class="flex items-center text-sm font-medium w-full py-2 px-3 text-gray-900 rounded-md hover:bg-gray-700 hover:text-white">
             Admin 
             <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
