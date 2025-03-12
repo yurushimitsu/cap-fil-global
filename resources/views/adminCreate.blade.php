@@ -8,7 +8,7 @@
         <div class="text-center text-2xl font-bold pb-10">
             CREATE DATA
         </div>
-        <div class="flex flex-wrap -mx-3 mb-3">
+        <div class="flex flex-wrap -mx-3">
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
                 Type
@@ -28,7 +28,7 @@
                 <input id="batchNo" name="batchNo" class="appearance-none block w-full bg-white text-gray-700 border border-grey-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="1" required>
             </div>
         </div>
-        <div class="flex flex-wrap -mx-3 mb-3">
+        <div class="flex flex-wrap -mx-3">
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                 Subscriber/Payee
@@ -42,7 +42,7 @@
                 <input id="accountNo" name="accountNo" class="appearance-none block w-full bg-white text-gray-700 border border-grey-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="123456789" required>
             </div>
         </div>
-        <div class="flex flex-wrap -mx-3 mb-3">
+        <div class="flex flex-wrap -mx-3">
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                 Amount
@@ -56,7 +56,7 @@
                 <input id="schedule" name="schedule" class="appearance-none block w-full bg-white text-gray-700 border border-grey-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="date" onfocus="disablePastDates()" required>
             </div>
         </div>
-        <div class="flex flex-wrap -mx-3 mb-3">
+        <div class="flex flex-wrap -mx-3">
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                 Serving Office

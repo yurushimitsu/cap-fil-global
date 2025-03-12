@@ -4,7 +4,7 @@
     
 <div id="default-carousel" class="relative w-full z-10" data-carousel="slide">
     <!-- Carousel wrapper -->
-    <div class="relative h-70 md:h-132 overflow-hidden">
+    <div class="relative h-60 md:h-132 overflow-hidden">
          <!-- Item 1 -->
         <div id="carousel-item-1" class="hidden duration-700 ease-in-out" data-carousel-item>
             <img src="{{ asset('img/pic1.jpg') }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">

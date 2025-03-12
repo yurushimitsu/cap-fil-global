@@ -7,7 +7,7 @@
     <div class="p-10">
         <h1 class="text-3xl font-medium text-center">FULLY PAID ACCOUNTS</h1>
     </div>
-    <div class="pb-10">
+    <div class="pb-10 px-10">
         <form class="max-w-sm mx-auto" method="GET" action="{{ route('searchFullypaid') }}">   
             @csrf  
             <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only ">Search</label>

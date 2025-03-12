@@ -23,34 +23,31 @@ Route::get('/', function () {
 
 Route::get('/home', function () {
     return view('homepage');
-});
+})->name('home');
 
-// Route::get('/announcement', function () {
-//     return view('announcement');
-// });
-
-Route::get('/announcement', [AdminController::class, 'showAnnouncement']);
+Route::get('/announcement', [AdminController::class, 'showAnnouncement'])->name('announcement');
 
 Route::get('/contact_us', function () {
     return view('contact_us');
-});
+})->name('contact_us');
 
 Route::get('/fullypaid', function () {
     return view('fullypaid');
-});
+})->name('fullypaid');
+
 Route::get('/terminated', function () {
     return view('terminated');
-});
+})->name('terminated');
 
 Route::group(['prefix' => 'admin'], function(){
-    Route::get('/create', function () { return view('adminCreate'); });
-    // Route::get('/announcement', function () { return view('adminAnnouncement'); });
-    Route::get('/table', [AdminController::class, 'getAllData']);
+    Route::get('/create', function () { return view('adminCreate'); })->name('adminCreateView');
+
+    Route::get('/table', [AdminController::class, 'getAllData'])->name('adminTableView');
     Route::post('/create', [AdminController::class, 'createAdminData'])->name('createAdminData');
     Route::post('/update', [AdminController::class, 'updateAdminData'])->name('updateAdminData');
     Route::delete('/delete/{dbTable}/{trancheNo}', [AdminController::class, 'deleteAdminData']);
 
-    Route::get('/announcement', [AdminController::class, 'getAllAnnouncement']);
+    Route::get('/announcement', [AdminController::class, 'getAllAnnouncement'])->name('adminAnnouncementView');
     Route::post('/announcement', [AdminController::class, 'uploadAnnouncement'])->name('uploadAnnouncement');
     Route::delete('/announcement/delete/{filename}', [AdminController::class, 'deleteAnnouncement']);
     
