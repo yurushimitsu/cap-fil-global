@@ -87,7 +87,7 @@
 
 <!-- Modal -->
 <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-opacity-50 transition-opacity duration-300">
-    <div class="relative w-full max-w-3xl p-4 md:p-8 bg-white rounded-lg shadow-lg transform transition-all duration-300">
+    <div class="mx-5 relative w-full max-w-3xl p-4 md:p-8 bg-white rounded-lg shadow-lg transform transition-all duration-300">
         <!-- Modal content -->
         <div class="relative">
             <!-- Modal header -->

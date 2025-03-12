@@ -3,8 +3,11 @@
 @section('body')
 
 <div class="container">
-    <form id="adminCreateForm" class="max-w-2xl mx-auto pt-10" method="POST" data-action="{{ route('createAdminData') }}">
+    <form id="adminCreateForm" class="max-w-2xl mx-auto p-5" method="POST" data-action="{{ route('createAdminData') }}">
         @csrf
+        <div class="text-center text-2xl font-bold pb-10">
+            CREATE DATA
+        </div>
         <div class="flex flex-wrap -mx-3 mb-3">
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
@@ -16,9 +19,6 @@
                         <option value="fullyPaid">Fully Paid</option>
                         <option value="terminated">Terminated</option>
                     </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                    </div>
                 </div>
             </div>
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -33,13 +33,13 @@
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                 Subscriber/Payee
                 </label>
-                <input id="subscriber" name="subscriber" class="appearance-none block w-full bg-white text-gray-700 border border-grey-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Juan Dela Cruz" required>
+                <input id="subscriber" name="subscriber" class="appearance-none block w-full bg-white text-gray-700 border border-grey-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="Juan Dela Cruz" required>
             </div>
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                 Account Number
                 </label>
-                <input id="accountNo" name="accountNo" class="appearance-none block w-full bg-white text-gray-700 border border-grey-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="123456789" required>
+                <input id="accountNo" name="accountNo" class="appearance-none block w-full bg-white text-gray-700 border border-grey-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="123456789" required>
             </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-3">
@@ -47,13 +47,13 @@
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                 Amount
                 </label>
-                <input id="amount" name="amount" class="appearance-none block w-full bg-white text-gray-700 border border-grey-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="1000.00" required>
+                <input id="amount" name="amount" class="appearance-none block w-full bg-white text-gray-700 border border-grey-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="1000.00" required>
             </div>
             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                 Schedule
                 </label>
-                <input id="schedule" name="schedule" class="appearance-none block w-full bg-white text-gray-700 border border-grey-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="date" required>
+                <input id="schedule" name="schedule" class="appearance-none block w-full bg-white text-gray-700 border border-grey-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="date" onfocus="disablePastDates()" required>
             </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-3">
@@ -61,7 +61,7 @@
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                 Serving Office
                 </label>
-                <input id="office" name="office" class="appearance-none block w-full bg-white text-gray-700 border border-grey-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Manila" required>
+                <input id="office" name="office" class="appearance-none block w-full bg-white text-gray-700 border border-grey-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="Manila" required>
             </div>
         </div>
         <div class="flex justify-end">
@@ -113,5 +113,15 @@
             });
         });
     });
+
+    function disablePastDates() {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("schedule").setAttribute("min", today);
+    }
 </script>
 @endsection

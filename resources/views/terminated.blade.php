@@ -22,7 +22,7 @@
             </div>
         </form>
     </div>
-    <div class="relative overflow-x-auto px-30 table-data pb-10">
+    <div class="relative overflow-x-auto px-10 md:px-30 table-data pb-10">
         @if(isset($search))
             @if($posts->isEmpty())
                 <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 role="alert">
