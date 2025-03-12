@@ -23,7 +23,7 @@
 </div>
 
 <div class="container content-center">
-    <div class="px-10 py-5">
+    <div class="px-10 py-3">
         <h1 class="text-3xl font-medium text-center">ALL ANNOUNCEMENTS</h1>
     </div>
     <div class="relative overflow-x-auto px-5 md:px-50 table-data pb-10">
