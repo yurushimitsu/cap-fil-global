@@ -59,3 +59,7 @@ Route::group(['prefix' => 'search'], function(){
     Route::get('/fullypaid', [FullypaidController::class, 'searchFullypaid'])->name('searchFullypaid');
     Route::get('/terminated', [TerminatedController::class, 'searchTerminated'])->name('searchTerminated');
 });
+
+Route::fallback(function() {
+    return view('fallback');
+});
