@@ -3,7 +3,7 @@
 @section('body')
     <div class="w-full flex-col justify-start items-center lg:gap-16 gap-10 inline-flex p-10 md:p-15">
         <div class="border border-indigo-300 h-[400px] rounded-lg w-full">
-          <div class="p-8 flex justify-between items-center border-b border-indigo-100">
+          <div class="px-8 py-4 flex justify-between items-center border-b border-indigo-100">
             <div class="block">
               <svg width="204" height="18" viewBox="0 0 204 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="8.78677" cy="8.78677" r="8.78677" transform="matrix(1 0 0 -1 0 17.6912)" fill="#E0E7FF"/>

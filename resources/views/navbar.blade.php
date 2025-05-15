@@ -1,6 +1,6 @@
 <nav class="" style="background-color: #B1D4E0">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-    <a href="{{ url('/home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
+    <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
         <img src="{{ asset('img/cap.png') }}" class="h-8" alt="Flowbite Logo" />
         <span class="hidden lg:block self-center md:text-2xl font-semibold whitespace-nowrap sm:text-sm">COLLEGE ASSURANCE PLAN PHILIPPINES, INC.</span>
         <span class="md:hidden self-center md:text-2xl font-semibold whitespace-nowrap sm:text-sm">CAP PHIL INC.</span>
@@ -14,7 +14,7 @@
     <div class="hidden w-full md:block md:w-auto" id="navbar-dropdown">
       <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-700 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
         <li>
-          <a href="{{ url('/home') }}" class="flex items-center rounded-md px-3 py-2 text-sm font-medium text-black {{ (Route::is('home')) ? 'bg-gray-700 text-white' : '' }} hover:bg-gray-700 hover:text-white" aria-current="page">Home</a>
+          <a href="{{ route('home') }}" class="flex items-center rounded-md px-3 py-2 text-sm font-medium text-black {{ (Route::is('home')) ? 'bg-gray-700 text-white' : '' }} hover:bg-gray-700 hover:text-white" aria-current="page">Home</a>
         </li>
         <li>
             <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" data-dropdown-trigger="hover" class="flex items-center text-sm font-medium w-full py-2 px-3 text-gray-900 rounded-md {{ (Route::is('fullypaid') || Route::is('terminated')) ? 'bg-gray-700 text-white' : '' }} hover:bg-gray-700 hover:text-white">
@@ -27,10 +27,10 @@
             <div id="dropdownNavbar" class="z-50 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44">
                 <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownLargeButton">
                   <li>
-                    <a href="{{ url('/fullypaid') }}" class="block px-4 py-2 hover:bg-gray-100">Fully Paid</a>
+                    <a href="{{ route('fullypaid') }}" class="block px-4 py-2 hover:bg-gray-100">Fully Paid</a>
                   </li>
                   <li>
-                    <a href="{{ url('/terminated') }}" class="block px-4 py-2 hover:bg-gray-100">Terminated</a>
+                    <a href="{{ route('terminated') }}" class="block px-4 py-2 hover:bg-gray-100">Terminated</a>
                   </li>
                 </ul>
             </div>
@@ -46,22 +46,22 @@
           <div id="dropdownNavbar2" class="z-50 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44">
               <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownLargeButton">
                 <li>
-                  <a href="{{ url('/admin/create') }}" class="block px-4 py-2 hover:bg-gray-100">Create</a>
+                  <a href="{{ route('adminCreateView') }}" class="block px-4 py-2 hover:bg-gray-100">Create</a>
                 </li>
                 <li>
-                  <a href="{{ url('/admin/table') }}" class="block px-4 py-2 hover:bg-gray-100">Table</a>
+                  <a href="{{ route('adminTableView') }}" class="block px-4 py-2 hover:bg-gray-100">Table</a>
                 </li>
                 <li>
-                  <a href="{{ url('/admin/announcement') }}" class="block px-4 py-2 hover:bg-gray-100">Announcement</a>
+                  <a href="{{ route('adminAnnouncementView') }}" class="block px-4 py-2 hover:bg-gray-100">Announcement</a>
                 </li>
               </ul>
           </div>
         </li>
         <li>
-          <a href="{{ url('/announcement') }}" class="flex items-center rounded-md px-3 py-2 text-sm font-medium text-black {{ (Route::is('announcement')) ? 'bg-gray-700 text-white' : '' }} hover:bg-gray-700 hover:text-white">Announcement</a>
+          <a href="{{ route('announcement') }}" class="flex items-center rounded-md px-3 py-2 text-sm font-medium text-black {{ (Route::is('announcement')) ? 'bg-gray-700 text-white' : '' }} hover:bg-gray-700 hover:text-white">Announcement</a>
         </li>
         <li>
-          <a href="{{ url('/contact_us') }}" class="flex items-center rounded-md px-3 py-2 text-sm font-medium text-black {{ (Route::is('contact_us')) ? 'bg-gray-700 text-white' : '' }} hover:bg-gray-700 hover:text-white">Contact Us</a>
+          <a href="{{ route('contact_us') }}" class="flex items-center rounded-md px-3 py-2 text-sm font-medium text-black {{ (Route::is('contact_us')) ? 'bg-gray-700 text-white' : '' }} hover:bg-gray-700 hover:text-white">Contact Us</a>
         </li>
       </ul>
     </div>
