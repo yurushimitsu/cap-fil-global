@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('body')
-    <div class="" >
+    <div>
         <div class="m-10 lg:mx-55 md:my-10 rounded-3xl text-center py-10" style="background-color: #B1D4E0">
             <div class="text-3xl md:text-4xl font-bold px-1 pb-3">CAP EDUCATION CALL CENTER HOTLINE</div>
             <br>
@@ -134,8 +134,7 @@
                 CAP Building, Jose Aquino Avenue corner J. Rosales Street, BUTUAN CITY <br>
                 CAP Building, corner M. Castillo & Abarca Streets Mangagoy, Bislig Surigao del Sur <br>
             </div>
-            {{-- <br><br> --}}
-            <hr class="w-190 h-px mx-auto my-4 border-0" style="background-color: #9FBEC9"> 
+            <hr class="w-full h-px mx-auto my-4 border-0" style="background-color: #9FBEC9"> 
             Question or comments? Our support team can help. Email us at 
             <a class="underline text-blue-600 hover:text-blue-800" href="mailto:info@capphil.com?subject = Feedback&amp;body = Message">
                 info@capphil.com
