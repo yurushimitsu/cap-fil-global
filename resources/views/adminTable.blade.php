@@ -68,7 +68,7 @@
                             </button>
             
                             <!-- Delete Button -->
-                            <button type="button" class="text-gray-900 bg-red-700 hover:bg-red-800 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-4 py-2.5 me-2 mb-2"
+                            <button type="button" class="text-gray-900 bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-4 py-2.5 me-2 mb-2"
                             id="deleteRecordBtn" 
                             data-tranche-no="{{ $row->trancheNo }}" 
                             data-db="{{ $db }}"
