@@ -2,7 +2,7 @@
 
 @section('body')
 
-<div class="container">
+<div class="">
     <form id="adminCreateAnnouncement" class="max-w-2xl mx-auto md:pt-10 p-5" method="POST" data-action="{{ route('uploadAnnouncement') }}" enctype="multipart/form-data">
         @csrf
         <div class="text-center text-2xl font-bold pb-10">
@@ -22,7 +22,7 @@
     </form>
 </div>
 
-<div class="container content-center">
+<div class="content-center">
     <div class="px-10 py-3">
         <h1 class="text-3xl font-medium text-center">ALL ANNOUNCEMENTS</h1>
     </div>

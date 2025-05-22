@@ -2,7 +2,7 @@
 
 @section('body')
 
-<div class="container">
+<div class="">
     <form id="adminCreateForm" class="max-w-2xl mx-auto p-5" method="POST" data-action="{{ route('createAdminData') }}">
         @csrf
         <div class="text-center text-2xl font-bold pb-10">

@@ -2,7 +2,7 @@
 
 @section('body')
 
-<div class="container content-center">
+<div class="content-center">
     <div class="p-10">
         <h1 class="text-3xl font-medium text-center">ALL DATA</h1>
     </div>
